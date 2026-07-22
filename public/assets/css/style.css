@@ -190,6 +190,21 @@ img { max-width: 100%; display: block; }
 .lel-article-content { font-size: 1.05rem; }
 .lel-article-content p { margin: 0 0 1.2em; }
 .lel-article-content h2 { margin-top: 1.6em; }
+.lel-article-content img { border-radius: var(--radius-lg); margin: 24px 0; }
+
+.lel-photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; }
+.lel-photo-pair figure { margin: 0; }
+.lel-photo-pair img { margin: 0; border-radius: var(--radius-lg); width: 100%; height: 260px; object-fit: cover; }
+.lel-photo-pair figcaption { text-align: center; font-size: 0.82rem; font-weight: 700; color: var(--green-deep); text-transform: uppercase; letter-spacing: 0.03em; margin-top: 10px; }
+@media (max-width: 700px) { .lel-photo-pair { grid-template-columns: 1fr; } }
+
+.lel-timeline { position: relative; margin: 30px 0; padding-left: 30px; border-left: 2px solid var(--green-pale); }
+.lel-timeline-item { position: relative; padding-bottom: 28px; }
+.lel-timeline-item:last-child { padding-bottom: 0; }
+.lel-timeline-item::before { content: ""; position: absolute; left: -37px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--green-deep); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--green-pale); }
+.lel-timeline-year { display: block; font-weight: 700; color: var(--green-deep); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
+.lel-timeline-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.lel-timeline-item p { margin: 0; }
 /* Certains articles migrés embarquent leur propre <style> avec un wrapper <article> limité en largeur (héritage WordPress) : on force la pleine largeur pour rester cohérent avec le reste du site, avec un peu d'air de part et d'autre pour ne pas coller le texte au bord. */
 .lel-article-content > article { max-width: none !important; margin: 0 !important; padding-left: 32px !important; padding-right: 32px !important; box-sizing: border-box !important; }
 
