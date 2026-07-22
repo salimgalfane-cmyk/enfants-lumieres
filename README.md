@@ -2,6 +2,8 @@
 
 Site vitrine de l'association humanitaire **Les Enfants Lumières** (LEL), migré depuis une version PHP procédurale vers CodeIgniter 4. Voir `CLAUDE.md` à la racine du dépôt pour le contexte complet du projet et le plan de migration.
 
+<!-- Test du pipeline CI/CD : ce commentaire vérifie que le workflow GitHub Actions déploie correctement après un merge sur main. Fichier non public (hors du dossier public/), aucun impact visible sur le site. -->
+
 ## Prérequis
 
 - PHP **8.2 minimum** (requis par CodeIgniter 4.7.x — testé en local avec PHP 8.4.19).
