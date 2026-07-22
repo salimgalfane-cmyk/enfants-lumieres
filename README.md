@@ -47,9 +47,9 @@ Un push sur la branche `main` du dépôt GitHub [`salimgalfane-cmyk/enfants-lumi
 
 1. Checkout du code.
 2. `composer install --no-dev --optimize-autoloader` sur le runner GitHub (le dossier `vendor/` n'est jamais commité, il est régénéré à chaque déploiement).
-3. Déploiement par **SFTP** (port 22, authentification par mot de passe) vers `/sites/enfants-lumieres/lel-site-ci4/` sur l'hébergement Infomaniak, via l'action `SamKirkland/FTP-Deploy-Action`. Seuls les fichiers modifiés sont transférés ; `.env*`, `vendor/`, et le contenu de `writable/` (cache, logs, session, uploads, debugbar) sont exclus du transfert pour ne jamais écraser l'état du serveur.
+3. Déploiement par **FTPS** (port 21, chiffré, authentification par mot de passe) vers `/sites/enfants-lumieres/lel-site-ci4/` sur l'hébergement Infomaniak, via l'action `SamKirkland/FTP-Deploy-Action`. Cette action ne supporte que FTP/FTPS, pas le SFTP (SSH) malgré le nom des secrets ci-dessous. Seuls les fichiers modifiés sont transférés ; `.env*`, `vendor/`, et le contenu de `writable/` (cache, logs, session, uploads, debugbar) sont exclus du transfert pour ne jamais écraser l'état du serveur.
 
-Secrets requis, stockés dans un **environnement GitHub** dédié nommé `enfants-lumieres.com` (`Settings > Environments` du dépôt, pas `Settings > Secrets and variables > Actions` — le job du workflow déclare `environment: enfants-lumieres.com` pour y avoir accès) :
+Secrets requis (nommés `SFTP_*` par habitude, mais utilisés ici en FTPS), stockés dans un **environnement GitHub** dédié nommé `enfants-lumieres.com` (`Settings > Environments` du dépôt, pas `Settings > Secrets and variables > Actions` — le job du workflow déclare `environment: enfants-lumieres.com` pour y avoir accès) :
 - `SFTP_SERVER` = `zi0g5.ftp.infomaniak.com`
 - `SFTP_USERNAME` = `zi0g5_galfane`
 - `SFTP_PASSWORD` = mot de passe FTP/SSH existant de cet utilisateur (Manager Infomaniak > Hébergement > FTP/SSH)
