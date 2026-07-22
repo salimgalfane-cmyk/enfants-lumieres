@@ -42,10 +42,16 @@ class Enfants extends BaseController
 
     public function index(): string
     {
+        $tri       = (string) $this->request->getGet('tri');
+        $tri       = in_array($tri, EnfantParrainageModel::COLONNES_TRIABLES, true) ? $tri : 'ordre';
+        $direction = strtolower((string) $this->request->getGet('dir')) === 'desc' ? 'desc' : 'asc';
+
         return view('admin/enfants/liste', [
             'adminPageTitle' => 'Enfants à parrainer',
             'admin'          => session('admin'),
-            'enfants'        => (new EnfantParrainageModel())->getToutes(),
+            'enfants'        => (new EnfantParrainageModel())->getToutes($tri, $direction),
+            'tri'            => $tri,
+            'direction'      => $direction,
         ]);
     }
 

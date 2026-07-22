@@ -17,7 +17,18 @@
   <p style="font-size:0.88rem; opacity:.75; margin-top:0;">Ces enfants s'affichent sur la page publique <a href="<?= site_url('parrainage') ?>" target="_blank">Parrainage</a>, dans l'ordre indiqué ci-dessous. Seuls les enfants « Actif » sont visibles.</p>
   <table class="admin-table">
     <thead>
-      <tr><th>Photo</th><th>Prénom</th><th>Matricule</th><th>Âge</th><th>Classe</th><th>Ordre</th><th>Parrainage</th><th>Bulletins</th><th>Visibilité</th><th>Actions</th></tr>
+      <tr>
+        <th>Photo</th>
+        <th><?= lelTriLien('admin/enfants', 'prenom', 'Prénom', $tri, $direction) ?></th>
+        <th><?= lelTriLien('admin/enfants', 'matricule', 'Matricule', $tri, $direction) ?></th>
+        <th><?= lelTriLien('admin/enfants', 'age', 'Âge', $tri, $direction) ?></th>
+        <th><?= lelTriLien('admin/enfants', 'classe', 'Classe', $tri, $direction) ?></th>
+        <th><?= lelTriLien('admin/enfants', 'ordre', 'Ordre', $tri, $direction) ?></th>
+        <th><?= lelTriLien('admin/enfants', 'statut', 'Parrainage', $tri, $direction) ?></th>
+        <th>Bulletins</th>
+        <th><?= lelTriLien('admin/enfants', 'actif', 'Visibilité', $tri, $direction) ?></th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
       <?php foreach ($enfants as $e): ?>

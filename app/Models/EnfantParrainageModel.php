@@ -40,9 +40,14 @@ class EnfantParrainageModel extends Model
             ->orderBy('ordre', 'ASC')->orderBy('id', 'ASC')->findAll();
     }
 
-    /** Tous les enfants, pour la liste back-office. */
-    public function getToutes(): array
+    public const COLONNES_TRIABLES = ['prenom', 'matricule', 'age', 'classe', 'ordre', 'statut', 'actif'];
+
+    /** Tous les enfants, pour la liste back-office, triables par colonne. */
+    public function getToutes(string $tri = 'ordre', string $direction = 'asc'): array
     {
-        return $this->orderBy('ordre', 'ASC')->orderBy('id', 'ASC')->findAll();
+        $colonne   = in_array($tri, self::COLONNES_TRIABLES, true) ? $tri : 'ordre';
+        $direction = strtolower($direction) === 'desc' ? 'DESC' : 'ASC';
+
+        return $this->orderBy($colonne, $direction)->orderBy('id', 'ASC')->findAll();
     }
 }

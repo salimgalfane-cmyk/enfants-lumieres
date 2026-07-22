@@ -26,6 +26,18 @@ if (! function_exists('navActive')) {
     }
 }
 
+if (! function_exists('lelTriLien')) {
+    /** Lien de tri pour un en-tête de tableau admin : bascule asc/desc, affiche une flèche sur la colonne active. */
+    function lelTriLien(string $route, string $colonne, string $label, string $triActuel, string $direction): string
+    {
+        $dirLien = ($triActuel === $colonne && $direction === 'asc') ? 'desc' : 'asc';
+        $fleche  = $triActuel === $colonne ? ($direction === 'asc' ? ' ▲' : ' ▼') : '';
+        $url     = site_url($route) . '?tri=' . urlencode($colonne) . '&dir=' . $dirLien;
+
+        return '<a href="' . esc($url) . '" style="color:inherit; text-decoration:none;">' . esc($label) . $fleche . '</a>';
+    }
+}
+
 if (! function_exists('icon')) {
     /**
      * Rend une icône SVG inline (trait, 1.5px, currentColor) à partir d'une clé courte.
