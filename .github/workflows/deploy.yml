@@ -1,0 +1,48 @@
+name: Déploiement production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    name: Build et déploiement SFTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          coverage: none
+
+      - name: Installer les dépendances de production
+        run: composer install --no-dev --optimize-autoloader --prefer-dist
+
+      - name: Déployer par SFTP vers Infomaniak
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          protocol: sftp
+          port: 22
+          server-dir: /sites/enfants-lumieres/lel-site-ci4/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            tests/**
+            .env
+            .env.production
+            .env.preprod
+            /writable/cache/**
+            /writable/logs/**
+            /writable/session/**
+            /writable/uploads/**
+            /writable/debugbar/**
