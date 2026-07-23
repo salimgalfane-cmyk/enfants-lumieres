@@ -188,6 +188,7 @@ L'étape 13 est validée : l'ancienne arborescence procédurale locale (`include
 ## Conventions de code à suivre après migration
 
 - **Langue** : code, commentaires et messages utilisateurs en **français**.
+- **Ne jamais utiliser le tiret cadratin (—) dans les textes générés** (articles, contenu back-office, UI, commentaires) : privilégier la virgule, les deux-points, les parenthèses, ou reformuler en deux phrases. S'applique à tout texte rédigé pour le site, pas seulement aux articles.
 - Utiliser le Query Builder / les Models CodeIgniter plutôt que du PDO brut : ne pas réintroduire de requêtes SQL concaténées.
 - Utiliser `esc()` pour tout affichage de donnée utilisateur, sauf `actualites.contenu` qui reste du HTML de confiance saisi en back-office par l'équipe.
 - Utiliser la Validation library de CodeIgniter pour tous les formulaires (contact, actualité, login) plutôt que des vérifications manuelles éparpillées.
