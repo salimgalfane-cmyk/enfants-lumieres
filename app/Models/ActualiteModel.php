@@ -96,6 +96,27 @@ class ActualiteModel extends Model
         }
     }
 
+    /** Articles publiés les plus vus, du plus consulté au moins consulté. */
+    public function getTopVues(int $limit = 5): array
+    {
+        return $this->select('actualites.titre, actualites.slug, actualites.vues, categories.nom AS categorie_nom')
+            ->join('categories', 'categories.id = actualites.categorie_id', 'left')
+            ->where('actualites.statut', 'publie')
+            ->orderBy('actualites.vues', 'DESC')
+            ->findAll($limit);
+    }
+
+    /** Vues cumulées et nombre d'articles publiés, groupés par catégorie. */
+    public function getVuesParCategorie(): array
+    {
+        return $this->select('categories.nom AS categorie_nom, SUM(actualites.vues) AS total_vues, COUNT(actualites.id) AS nb_articles')
+            ->join('categories', 'categories.id = actualites.categorie_id', 'left')
+            ->where('actualites.statut', 'publie')
+            ->groupBy('actualites.categorie_id')
+            ->orderBy('total_vues', 'DESC')
+            ->findAll();
+    }
+
     /**
      * Résout le CTA d'une actualité : modèle lié + surcharges éventuelles.
      * Point d'entrée unique pour cette logique — ne pas la dupliquer ailleurs.

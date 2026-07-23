@@ -29,4 +29,10 @@ class MessageContactModel extends Model
     {
         return (bool) $this->update($id, ['lu' => 1]);
     }
+
+    /** Nombre de messages reçus depuis le 1er du mois en cours. */
+    public function getRecusCeMois(): int
+    {
+        return $this->where('recu_le >=', date('Y-m-01 00:00:00'))->countAllResults();
+    }
 }
