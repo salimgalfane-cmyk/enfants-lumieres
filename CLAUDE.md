@@ -203,7 +203,7 @@ L'étape 13 est validée : l'ancienne arborescence procédurale locale (`include
 - ✅ ~~Remplacer le logo placeholder~~ — fait, avec `favicon.ico`.
 - ~~Migrer le contenu réel de la page À propos~~ — sans objet, la page a été retirée (contenu de mission absorbé par l'accueil).
 - ✅ ~~Contenu réel de la page Parrainage~~ — fait, module complet (liste d'enfants à parrainer gérée en admin, onglet enfants déjà parrainés, mention de consentement parental).
-- Ajouter une page Événements/Agenda (identifiée dans l'audit Google Ad Grants), sur le modèle du module Actualités.
+- ⏸️ **En pause (2026-07-23)** : page Événements/Agenda (identifiée dans l'audit Google Ad Grants). Discuté avec l'association : les dates sont parfois connues à l'avance (ex. COPIL Lumin'Îles), mais il n'y a pas encore de rythme d'événements récurrents/systématiques justifiant un module dédié (CRUD admin, page publique). Les échéances ponctuelles connues à l'avance sont mieux traitées via un simple encart dans le contenu existant (Actualités, page Notre impact) que via un nouveau module. À reconsidérer si un vrai calendrier récurrent émerge.
 - Envisager un tableau de bord de statistiques plus riche (les vues par actualité sont déjà trackées en base).
 
 ## Déploiement
