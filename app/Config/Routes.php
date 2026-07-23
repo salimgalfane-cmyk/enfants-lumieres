@@ -37,6 +37,11 @@ $routes->group('admin', ['filter' => 'adminauth'], static function (RouteCollect
 
     $routes->get('contacts', 'Admin\Contacts::index');
     $routes->get('contacts/(:num)/marquer-lu', 'Admin\Contacts::marquerLu/$1');
+    $routes->get('contacts/(:num)/delete', 'Admin\Contacts::supprimer/$1');
+    $routes->get('contacts/(:num)/bloquer-ip', 'Admin\Contacts::bloquerIp/$1');
+
+    $routes->get('ips-bloquees', 'Admin\IpsBloquees::index');
+    $routes->get('ips-bloquees/(:num)/delete', 'Admin\IpsBloquees::debloquer/$1');
 
     $routes->get('enfants', 'Admin\Enfants::index');
     $routes->get('enfants/create', 'Admin\Enfants::create');
