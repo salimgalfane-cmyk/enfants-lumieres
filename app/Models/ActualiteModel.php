@@ -45,7 +45,10 @@ class ActualiteModel extends Model
             ->findAll($limit, $offset);
     }
 
-    /** Actualité publiée par son slug ; incrémente son compteur de vues. */
+    /**
+     * Actualité publiée par son slug ; incrémente son compteur de vues, une fois par IP,
+     * et seulement pour les visiteurs non connectés au back-office (vues admin exclues).
+     */
     public function getParSlug(string $slug): ?array
     {
         $actualite = $this->select('actualites.*, categories.nom AS categorie_nom, categories.icone AS categorie_icone')
@@ -55,8 +58,19 @@ class ActualiteModel extends Model
             ->where('actualites.date_publication <=', date('Y-m-d H:i:s'))
             ->first();
 
-        if ($actualite !== null) {
-            $this->set('vues', 'vues + 1', false)->update($actualite['id']);
+        if ($actualite !== null && ! session('admin')) {
+            $ipHash = hash('sha256', service('request')->getIPAddress());
+            $db     = db_connect();
+
+            $db->query(
+                'INSERT INTO actualites_vues_ip (actualite_id, ip_hash, vu_le) VALUES (?, ?, ?)
+                 ON DUPLICATE KEY UPDATE vu_le = vu_le',
+                [$actualite['id'], $ipHash, date('Y-m-d H:i:s')]
+            );
+
+            if ($db->affectedRows() === 1) {
+                $this->set('vues', 'vues + 1', false)->update($actualite['id']);
+            }
         }
 
         return $actualite;
